@@ -67,7 +67,7 @@ async function loadDashboardData() {
     
     const userTypeBadge = document.getElementById('userTypeBadge');
     if (user.user_type === 'company') {
-        userTypeBadge.textContent = '기업 멤버쉽';
+        userTypeBadge.textContent = '기업 멤버십';
         userTypeBadge.classList.add('badge-company');
         
         // Load membership info

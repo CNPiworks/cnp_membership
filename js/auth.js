@@ -260,7 +260,7 @@ async function handleMembershipRegistration(e) {
             })
         });
         
-        showMessage('registerMessage', '멤버쉽 등록이 완료되었습니다! 로그인 페이지로 이동합니다...', 'success');
+        showMessage('registerMessage', '멤버십 등록이 완료되었습니다! 로그인 페이지로 이동합니다...', 'success');
         
         setTimeout(() => {
             window.location.href = 'login.html';
@@ -268,6 +268,6 @@ async function handleMembershipRegistration(e) {
         
     } catch (error) {
         console.error('Membership registration error:', error);
-        showMessage('registerMessage', '멤버쉽 등록 중 오류가 발생했습니다. 다시 시도해주세요.', 'error');
+        showMessage('registerMessage', '멤버십 등록 중 오류가 발생했습니다. 다시 시도해주세요.', 'error');
     }
 }
