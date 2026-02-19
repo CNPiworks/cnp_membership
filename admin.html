@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 대시보드 - CNP 아카데미</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .admin-header {
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .admin-header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .admin-header p {
+            margin: 0.5rem 0 0 0;
+            opacity: 0.9;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .stat-card.membership {
+            border-left-color: #f59e0b;
+        }
+
+        .stat-card.revenue {
+            border-left-color: #10b981;
+        }
+
+        .stat-card h3 {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.875rem;
+            color: #6b7280;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .stat-card .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .stat-card .stat-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+
+        .filter-bar {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-bar select,
+        .filter-bar input {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+        }
+
+        .filter-bar button {
+            padding: 0.5rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .filter-bar button:hover {
+            background: var(--primary-dark);
+        }
+
+        .export-btn {
+            margin-left: auto;
+            background: #10b981 !important;
+        }
+
+        .export-btn:hover {
+            background: #059669 !important;
+        }
+
+        .members-table-container {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .table-header h2 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .members-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .members-table thead {
+            background: #f9fafb;
+        }
+
+        .members-table th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: #6b7280;
+            border-bottom: 1px solid #e5e7eb;
+            white-space: nowrap;
+        }
+
+        .members-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.875rem;
+        }
+
+        .members-table tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge.individual {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .badge.company {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge.membership {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge.none {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1.5rem;
+        }
+
+        .pagination button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e5e7eb;
+            background: white;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination .page-info {
+            padding: 0 1rem;
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+            .filter-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .export-btn {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>CNP 아카데미</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="admin.html" class="active"><i class="fas fa-shield-alt"></i> 관리자</a></li>
+                <li><a href="dashboard.html">대시보드</a></li>
+                <li><a href="#" onclick="logout()">로그아웃</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Admin Header -->
+    <div class="admin-header">
+        <div class="container">
+            <h1><i class="fas fa-shield-alt"></i> 관리자 대시보드</h1>
+            <p>회원 정보 및 통계를 확인하고 관리할 수 있습니다</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container" style="padding-bottom: 3rem;">
+        <!-- Statistics -->
+        <div class="admin-stats">
+            <div class="stat-card">
+                <h3>전체 회원</h3>
+                <div class="stat-value" id="totalMembers">-</div>
+                <div class="stat-label">Total Members</div>
+            </div>
+            <div class="stat-card">
+                <h3>개인 회원</h3>
+                <div class="stat-value" id="individualMembers">-</div>
+                <div class="stat-label">Individual</div>
+            </div>
+            <div class="stat-card">
+                <h3>사업자 회원</h3>
+                <div class="stat-value" id="companyMembers">-</div>
+                <div class="stat-label">Company</div>
+            </div>
+            <div class="stat-card membership">
+                <h3>멤버십 회원</h3>
+                <div class="stat-value" id="membershipCount">-</div>
+                <div class="stat-label">Membership Subscribers</div>
+            </div>
+            <div class="stat-card revenue">
+                <h3>총 좌석 수</h3>
+                <div class="stat-value" id="totalSeats">-</div>
+                <div class="stat-label">Total Seats Purchased</div>
+            </div>
+            <div class="stat-card revenue">
+                <h3>예상 매출</h3>
+                <div class="stat-value" id="totalRevenue">-</div>
+                <div class="stat-label">Expected Revenue (멤버십)</div>
+            </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <select id="filterUserType">
+                <option value="">전체 회원 유형</option>
+                <option value="individual">개인 회원</option>
+                <option value="company">사업자 회원</option>
+            </select>
+
+            <select id="filterMembershipType">
+                <option value="">전체 멤버십 유형</option>
+                <option value="membership">멤버십</option>
+                <option value="none">일반</option>
+            </select>
+
+            <input type="text" id="searchKeyword" placeholder="이름, 이메일, 회사명 검색...">
+
+            <button onclick="applyFilters()">
+                <i class="fas fa-filter"></i> 필터 적용
+            </button>
+
+            <button class="export-btn" onclick="exportToCSV()">
+                <i class="fas fa-file-csv"></i> CSV 내보내기
+            </button>
+        </div>
+
+        <!-- Members Table -->
+        <div class="members-table-container">
+            <div class="table-header">
+                <h2>회원 목록</h2>
+                <span id="memberCount">총 0명</span>
+            </div>
+            <div class="table-wrapper">
+                <table class="members-table">
+                    <thead>
+                        <tr>
+                            <th>가입일</th>
+                            <th>이름</th>
+                            <th>이메일</th>
+                            <th>전화번호</th>
+                            <th>회원 유형</th>
+                            <th>멤버십</th>
+                            <th>회사명</th>
+                            <th>좌석 수</th>
+                            <th>사업자번호</th>
+                            <th>대표자명</th>
+                        </tr>
+                    </thead>
+                    <tbody id="membersTableBody">
+                        <tr>
+                            <td colspan="10" class="loading">
+                                <i class="fas fa-spinner fa-spin"></i> 데이터를 불러오는 중...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination" id="pagination">
+                <button onclick="previousPage()" id="prevBtn" disabled>
+                    <i class="fas fa-chevron-left"></i> 이전
+                </button>
+                <span class="page-info" id="pageInfo">1 / 1</span>
+                <button onclick="nextPage()" id="nextBtn" disabled>
+                    다음 <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 CNP 아카데미. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

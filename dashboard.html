@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대시보드 - CNP 아카데미</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>CNP 아카데미</span>
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="courses.html">교육과정</a></li>
+                <li><a href="dashboard.html" class="active">대시보드</a></li>
+                <li id="adminMenuLink" style="display: none;"><a href="admin.html"><i class="fas fa-shield-alt"></i> 관리자</a></li>
+                <li><a href="#" id="navAuthLink">로그아웃</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Dashboard Container -->
+    <section class="dashboard-section">
+        <div class="container">
+            <!-- User Info Header -->
+            <div class="dashboard-header">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="user-details">
+                        <h2 id="userName">사용자님</h2>
+                        <p id="userEmail">email@example.com</p>
+                        <span id="userTypeBadge" class="badge">개인회원</span>
+                    </div>
+                </div>
+                <div class="dashboard-actions">
+                    <button class="btn btn-outline" id="editProfileBtn">
+                        <i class="fas fa-user-edit"></i> 프로필 수정
+                    </button>
+                </div>
+            </div>
+
+            <!-- Membership Info (for company users) -->
+            <div id="membershipInfo" class="membership-info-card" style="display: none;">
+                <div class="card-header">
+                    <h3><i class="fas fa-building"></i> 멤버쉽 정보</h3>
+                </div>
+                <div class="card-body">
+                    <div class="membership-stats">
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fas fa-building"></i></div>
+                            <div class="stat-content">
+                                <span class="stat-label">회사명</span>
+                                <span class="stat-value" id="companyName">-</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fas fa-chair"></i></div>
+                            <div class="stat-content">
+                                <span class="stat-label">구매 좌석</span>
+                                <span class="stat-value" id="seatsPurchased">0</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                            <div class="stat-content">
+                                <span class="stat-label">멤버쉽 기간</span>
+                                <span class="stat-value" id="membershipPeriod">-</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                            <div class="stat-content">
+                                <span class="stat-label">상태</span>
+                                <span class="stat-value" id="membershipStatus">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- My Courses -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-book-reader"></i> 내 수강 과정</h3>
+                    <a href="courses.html" class="btn btn-outline-small">
+                        <i class="fas fa-plus"></i> 과정 추가
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div id="myCoursesContainer">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i> 불러오는 중...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Attendance Record -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-clipboard-check"></i> 출석 현황</h3>
+                </div>
+                <div class="card-body">
+                    <div id="attendanceContainer">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i> 불러오는 중...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Attendance Check Modal -->
+    <div id="attendanceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-clipboard-check"></i> 출석 체크</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="attendanceModalContent">
+                    <p class="attendance-course-name" id="attendanceCourseName"></p>
+                    <p class="attendance-session-info" id="attendanceSessionInfo"></p>
+                    <div class="attendance-time">
+                        <i class="fas fa-clock"></i>
+                        <span id="attendanceTime"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-close">취소</button>
+                <button class="btn btn-primary" id="confirmAttendanceBtn">
+                    <i class="fas fa-check"></i> 출석 확인
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 CNP 아카데미. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

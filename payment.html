@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비용 납부 - CNP 아카데미</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .cart-section {
+            background: #f9fafb;
+            padding: 2rem 0;
+        }
+
+        .cart-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .cart-items {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .cart-item:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-item-checkbox {
+            flex-shrink: 0;
+        }
+
+        .cart-item-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .cart-item-meta {
+            font-size: 0.875rem;
+            color: #6b7280;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .cart-item-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .cart-summary {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-total {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--primary-color);
+        }
+
+        .payment-section {
+            background: white;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-method {
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary-color);
+            background: #f0f9ff;
+        }
+
+        .payment-method.active {
+            border-color: var(--primary-color);
+            background: #dbeafe;
+        }
+
+        .payment-method i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .payment-details {
+            display: none;
+            padding: 1.5rem;
+            background: #f9fafb;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .payment-details.active {
+            display: block;
+        }
+
+        .file-upload-area {
+            border: 2px dashed #d1d5db;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--primary-color);
+            background: #f0f9ff;
+        }
+
+        .file-upload-area.dragover {
+            border-color: var(--primary-color);
+            background: #dbeafe;
+        }
+
+        .uploaded-file {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.375rem;
+            margin-top: 0.5rem;
+        }
+
+        .uploaded-file i {
+            color: var(--success-color);
+        }
+
+        .remove-file {
+            margin-left: auto;
+            color: var(--danger-color);
+            cursor: pointer;
+        }
+
+        .empty-cart {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .empty-cart i {
+            font-size: 4rem;
+            opacity: 0.3;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 1024px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>CNP 아카데미</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="courses.html">교육과정</a></li>
+                <li><a href="dashboard.html">대시보드</a></li>
+                <li><a href="#" onclick="logout()">로그아웃</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1><i class="fas fa-shopping-cart"></i> 비용 납부</h1>
+            <p>수강 신청한 과정을 선택하여 비용을 납부하세요</p>
+        </div>
+    </div>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <div class="cart-container">
+                <!-- Cart Items -->
+                <div class="cart-items">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                        <h2>수강 신청 과정</h2>
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" id="selectAllCheckbox" onchange="selectAllCourses()">
+                            <span>전체 선택</span>
+                        </label>
+                    </div>
+                    <div id="cartItemsContainer">
+                        <div class="loading" style="text-align: center; padding: 3rem;">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 2rem; color: #6b7280;"></i>
+                            <p style="margin-top: 1rem; color: #6b7280;">수강 신청 내역을 불러오는 중...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="cart-summary">
+                    <h3 style="margin-bottom: 1rem;">결제 정보</h3>
+                    <div class="summary-row">
+                        <span>선택한 과정</span>
+                        <span id="selectedCount">0개</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>총 수강료</span>
+                        <span id="subtotal">0원</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>최종 결제금액</span>
+                        <span id="totalAmount">0원</span>
+                    </div>
+                    <button class="btn btn-primary btn-block" onclick="proceedToPayment()" style="margin-top: 1.5rem;">
+                        <i class="fas fa-credit-card"></i> 결제하기
+                    </button>
+                    <a href="courses.html" class="btn btn-outline btn-block" style="margin-top: 0.5rem;">
+                        <i class="fas fa-plus"></i> 과정 더 보기
+                    </a>
+                </div>
+            </div>
+
+            <!-- Payment Section -->
+            <div id="paymentSection" class="payment-section" style="display: none;">
+                <h2 style="margin-bottom: 1.5rem;"><i class="fas fa-credit-card"></i> 결제 수단 선택</h2>
+                
+                <div class="payment-methods">
+                    <div class="payment-method" onclick="selectPaymentMethod('bank')">
+                        <i class="fas fa-university"></i>
+                        <h4>계좌이체</h4>
+                        <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem;">무통장 입금</p>
+                    </div>
+                    <div class="payment-method" onclick="selectPaymentMethod('tax')">
+                        <i class="fas fa-file-invoice"></i>
+                        <h4>세금계산서</h4>
+                        <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem;">사업자 전용</p>
+                    </div>
+                    <div class="payment-method" onclick="selectPaymentMethod('receipt')">
+                        <i class="fas fa-receipt"></i>
+                        <h4>현금영수증</h4>
+                        <p style="font-size: 0.875rem; color: #6b7280; margin-top: 0.5rem;">개인 전용</p>
+                    </div>
+                </div>
+
+                <!-- Bank Transfer Details -->
+                <div id="bankDetails" class="payment-details">
+                    <h3><i class="fas fa-university"></i> 계좌이체 안내</h3>
+                    <div class="info-box" style="margin: 1rem 0;">
+                        <p><strong>입금 계좌</strong></p>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem;">
+                            <span style="font-size: 1.25rem; font-weight: 600;">우리은행 1005-123-456789</span>
+                            <button class="btn btn-outline" onclick="copyAccountNumber()">
+                                <i class="fas fa-copy"></i> 복사
+                            </button>
+                        </div>
+                        <p style="margin-top: 1rem;"><strong>예금주:</strong> (주)CNP그룹</p>
+                        <p><strong>입금자명:</strong> <span id="depositorName"></span></p>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        입금 후 하단의 "입금 완료" 버튼을 클릭해 주세요. 확인까지 1-2영업일이 소요됩니다.
+                    </div>
+                </div>
+
+                <!-- Tax Invoice Details -->
+                <div id="taxDetails" class="payment-details">
+                    <h3><i class="fas fa-file-invoice"></i> 세금계산서 발급</h3>
+                    <form id="taxInvoiceForm">
+                        <div class="form-group">
+                            <label>사업자등록번호 <span class="required">*</span></label>
+                            <input type="text" id="businessNumber" required placeholder="000-00-00000">
+                        </div>
+                        <div class="form-group">
+                            <label>상호명 <span class="required">*</span></label>
+                            <input type="text" id="companyName" required placeholder="(주)아이웍스">
+                        </div>
+                        <div class="form-group">
+                            <label>대표자명 <span class="required">*</span></label>
+                            <input type="text" id="ceoName" required placeholder="홍길동">
+                        </div>
+                        <div class="form-group">
+                            <label>사업장 주소 <span class="required">*</span></label>
+                            <input type="text" id="businessAddress" required placeholder="서울시 강남구...">
+                        </div>
+                        <div class="form-group">
+                            <label>업태 / 종목 <span class="required">*</span></label>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <input type="text" id="businessType" required placeholder="서비스업">
+                                <input type="text" id="businessItem" required placeholder="교육">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>세금계산서 수신 이메일 <span class="required">*</span></label>
+                            <input type="email" id="taxEmail" required placeholder="tax@company.com">
+                        </div>
+                        
+                        <!-- Business License Upload -->
+                        <div class="form-group">
+                            <label>사업자등록증 업로드 <span class="required">*</span></label>
+                            <div class="file-upload-area" id="fileUploadArea" onclick="document.getElementById('businessLicenseFile').click()">
+                                <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #6b7280;"></i>
+                                <p style="margin-top: 0.5rem; color: #6b7280;">클릭하여 파일 선택 또는 드래그 앤 드롭</p>
+                                <p style="font-size: 0.875rem; color: #9ca3af;">지원 형식: JPG, PNG, PDF (최대 5MB)</p>
+                            </div>
+                            <input type="file" id="businessLicenseFile" accept=".jpg,.jpeg,.png,.pdf" style="display: none;" onchange="handleFileUpload(event)">
+                            <div id="uploadedFileInfo"></div>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            입금 확인 후 1-2일 내 이메일로 세금계산서가 발송됩니다.
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Cash Receipt Details -->
+                <div id="receiptDetails" class="payment-details">
+                    <h3><i class="fas fa-receipt"></i> 현금영수증 발급</h3>
+                    <form id="cashReceiptForm">
+                        <div class="form-group">
+                            <label>발급 유형 <span class="required">*</span></label>
+                            <select id="receiptType" required>
+                                <option value="">선택하세요</option>
+                                <option value="phone">휴대폰번호</option>
+                                <option value="card">현금영수증카드</option>
+                                <option value="ssn">주민등록번호</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label id="receiptNumberLabel">발급번호 <span class="required">*</span></label>
+                            <input type="text" id="receiptNumber" required placeholder="숫자만 입력">
+                        </div>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            입금 확인 후 국세청에 현금영수증이 자동 발급됩니다. 발급 완료 시 SMS로 안내드립니다.
+                        </div>
+                    </form>
+                </div>
+
+                <button class="btn btn-primary btn-block" onclick="submitPayment()" style="margin-top: 2rem; font-size: 1.125rem; padding: 1rem;">
+                    <i class="fas fa-check-circle"></i> 입금 완료 확인 요청
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 CNP 아카데미. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/payment-cart.js"></script>
+</body>
+</html>

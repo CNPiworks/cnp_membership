@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 - CNP 아카데미</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>CNP 아카데미</span>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">홈</a></li>
+                <li><a href="courses.html">교육과정</a></li>
+                <li><a href="login.html">로그인</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Register Section -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <i class="fas fa-user-plus"></i>
+                        <h2>회원가입</h2>
+                        <p>회원 유형과 멤버십 여부를 선택하세요</p>
+                    </div>
+
+                    <!-- Step 1: User Type Selection -->
+                    <div id="step1" class="registration-step active">
+                        <h3 class="step-title">
+                            <span class="step-number">1</span> 회원 유형 선택
+                        </h3>
+                        <div class="registration-type-selector">
+                            <button type="button" class="type-btn" data-user-type="individual">
+                                <i class="fas fa-user"></i>
+                                <span>개인 회원</span>
+                                <small>개인 자격으로 등록</small>
+                            </button>
+                            <button type="button" class="type-btn" data-user-type="business">
+                                <i class="fas fa-briefcase"></i>
+                                <span>사업자 회원</span>
+                                <small>사업자 자격으로 등록</small>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Registration Form -->
+                    <div id="step2" class="registration-step">
+                        <h3 class="step-title">
+                            <span class="step-number">2</span> 회원 정보 입력
+                        </h3>
+
+                        <!-- Individual Form -->
+                        <form id="individualForm" class="auth-form registration-form">
+                            <div id="individualBasicInfo">
+                                <div class="form-group">
+                                    <label for="indiv_name">
+                                        <i class="fas fa-user"></i> 이름 <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="indiv_name" name="name" required placeholder="홍길동">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="indiv_email">
+                                        <i class="fas fa-envelope"></i> 이메일 <span class="required">*</span>
+                                    </label>
+                                    <input type="email" id="indiv_email" name="email" required placeholder="example@email.com">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="indiv_password">
+                                        <i class="fas fa-lock"></i> 비밀번호 <span class="required">*</span>
+                                    </label>
+                                    <input type="password" id="indiv_password" name="password" required placeholder="8자 이상 입력" minlength="8">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="indiv_password_confirm">
+                                        <i class="fas fa-lock"></i> 비밀번호 확인 <span class="required">*</span>
+                                    </label>
+                                    <input type="password" id="indiv_password_confirm" name="password_confirm" required placeholder="비밀번호 재입력">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="indiv_phone">
+                                        <i class="fas fa-phone"></i> 전화번호 <span class="required">*</span>
+                                    </label>
+                                    <input type="tel" id="indiv_phone" name="phone" required placeholder="010-1234-5678">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="indiv_company">
+                                        <i class="fas fa-building"></i> 소속 회사
+                                    </label>
+                                    <input type="text" id="indiv_company" name="company" placeholder="회사명 (선택)">
+                                </div>
+                            </div>
+
+                            <!-- Individual Membership Checkbox -->
+                            <div class="form-group">
+                                <label class="checkbox-label membership-checkbox">
+                                    <input type="checkbox" id="indiv_membership_check">
+                                    <span>멤버십으로 등록 <i class="fas fa-star" style="color: #f39c12;"></i></span>
+                                </label>
+                                <small class="form-help" style="margin-left: 24px; display: block; color: #666;">
+                                    좌석당 100만원으로 1년간 모든 교육 수강 가능 (개별 수강 대비 58만원 절약!)
+                                </small>
+                            </div>
+
+                            <!-- Individual Membership Fields -->
+                            <div id="individualMembershipInfo" style="display: none;">
+                                <div class="form-section-divider">
+                                    <i class="fas fa-star"></i> 멤버십 정보
+                                </div>
+                                
+                                <div class="membership-info-highlight">
+                                    <i class="fas fa-info-circle"></i>
+                                    <p>개인 멤버십으로 1년간 모든 교육을 무제한 수강할 수 있습니다.<br>
+                                    필요 시 추가 좌석을 구매하여 가족이나 동료와 함께 참여할 수도 있습니다.</p>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="indiv_seats">
+                                        <i class="fas fa-chair"></i> 구매 좌석 수 <span class="required">*</span>
+                                    </label>
+                                    <input type="number" id="indiv_seats" name="seats_purchased" min="1" value="1" placeholder="1" step="1">
+                                    <small class="form-help">
+                                        <i class="fas fa-lightbulb"></i> 기본 1좌석 (본인), 추가 좌석 구매 시 지인과 함께 수강 가능 (좌석당 연 1,000,000원)
+                                    </small>
+                                </div>
+
+                                <div class="price-calculator">
+                                    <div class="calc-row">
+                                        <span><i class="fas fa-users"></i> 좌석 수:</span>
+                                        <span id="indiv_calc_seats">1</span>
+                                    </div>
+                                    <div class="calc-row">
+                                        <span><i class="fas fa-tag"></i> 좌석당 가격:</span>
+                                        <span>1,000,000원</span>
+                                    </div>
+                                    <div class="calc-row total">
+                                        <span><i class="fas fa-calculator"></i> 총 결제금액:</span>
+                                        <span id="indiv_calc_total" style="font-size: 1.3em; font-weight: 700; color: #2563eb;">1,000,000원</span>
+                                    </div>
+                                    <div class="calc-row savings">
+                                        <span><i class="fas fa-piggy-bank"></i> 절약 금액 (좌석당):</span>
+                                        <span style="color: #10b981; font-weight: 600;">580,000원</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="indiv_terms" required>
+                                    <span>이용약관 및 개인정보처리방침에 동의합니다 <span class="required">*</span></span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fas fa-user-plus"></i> <span id="indiv_submit_text">회원 가입</span>
+                            </button>
+                        </form>
+
+                        <!-- Business Form -->
+                        <form id="businessForm" class="auth-form registration-form" style="display: none;">
+                            <div id="businessBasicInfo">
+                                <div class="form-group">
+                                    <label for="biz_business_number">
+                                        <i class="fas fa-id-card"></i> 사업자등록번호 <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="biz_business_number" name="business_number" required placeholder="000-00-00000">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="biz_company_name">
+                                        <i class="fas fa-building"></i> 회사명(상호) <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="biz_company_name" name="company_name" required placeholder="(주)아이웍스">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="biz_ceo_name">
+                                        <i class="fas fa-user-tie"></i> 대표자명 <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="biz_ceo_name" name="ceo_name" required placeholder="홍길동">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="biz_admin_name">
+                                        <i class="fas fa-user"></i> 담당자 이름 <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="biz_admin_name" name="name" required placeholder="담당자명">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="biz_email">
+                                        <i class="fas fa-envelope"></i> 이메일 <span class="required">*</span>
+                                    </label>
+                                    <input type="email" id="biz_email" name="email" required placeholder="business@company.com">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="biz_password">
+                                        <i class="fas fa-lock"></i> 비밀번호 <span class="required">*</span>
+                                    </label>
+                                    <input type="password" id="biz_password" name="password" required placeholder="8자 이상 입력" minlength="8">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="biz_password_confirm">
+                                        <i class="fas fa-lock"></i> 비밀번호 확인 <span class="required">*</span>
+                                    </label>
+                                    <input type="password" id="biz_password_confirm" name="password_confirm" required placeholder="비밀번호 재입력">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="biz_phone">
+                                        <i class="fas fa-phone"></i> 전화번호 <span class="required">*</span>
+                                    </label>
+                                    <input type="tel" id="biz_phone" name="phone" required placeholder="02-1234-5678">
+                                </div>
+                            </div>
+
+                            <!-- Business Membership Checkbox -->
+                            <div class="form-group">
+                                <label class="checkbox-label membership-checkbox">
+                                    <input type="checkbox" id="biz_membership_check">
+                                    <span>멤버십으로 등록 <i class="fas fa-star" style="color: #f39c12;"></i></span>
+                                </label>
+                                <small class="form-help" style="margin-left: 24px; display: block; color: #666;">
+                                    좌석당 100만원으로 1년간 모든 교육 수강 가능 (개별 수강 대비 58만원 절약!)<br>
+                                    <strong style="color: #2563eb;">💼 사업자 멤버십: 구매한 좌석 수만큼 회사 소속 직원들이 자유롭게 교육에 참여할 수 있습니다.</strong>
+                                </small>
+                            </div>
+
+                            <!-- Business Membership Fields -->
+                            <div id="businessMembershipInfo" style="display: none;">
+                                <div class="form-section-divider">
+                                    <i class="fas fa-star"></i> 멤버십 정보
+                                </div>
+                                
+                                <div class="membership-info-highlight">
+                                    <i class="fas fa-info-circle"></i>
+                                    <p>구매하신 좌석 수만큼 회사 소속 임직원이 1년간 모든 교육을 자유롭게 수강할 수 있습니다.<br>
+                                    예) 5좌석 구매 시 → 5명의 직원이 동시에 또는 교육별로 다르게 참여 가능</p>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="biz_seats">
+                                        <i class="fas fa-chair"></i> 구매 좌석 수 <span class="required">*</span>
+                                    </label>
+                                    <input type="number" id="biz_seats" name="seats_purchased" min="1" value="1" placeholder="예: 5" step="1">
+                                    <small class="form-help">
+                                        <i class="fas fa-lightbulb"></i> 추천: 교육에 참여할 예상 인원 수만큼 구매하세요. (좌석당 연 1,000,000원)
+                                    </small>
+                                </div>
+
+                                <div class="price-calculator">
+                                    <div class="calc-row">
+                                        <span><i class="fas fa-users"></i> 좌석 수:</span>
+                                        <span id="biz_calc_seats">1</span>
+                                    </div>
+                                    <div class="calc-row">
+                                        <span><i class="fas fa-tag"></i> 좌석당 가격:</span>
+                                        <span>1,000,000원</span>
+                                    </div>
+                                    <div class="calc-row total">
+                                        <span><i class="fas fa-calculator"></i> 총 결제금액:</span>
+                                        <span id="biz_calc_total" style="font-size: 1.3em; font-weight: 700; color: #2563eb;">1,000,000원</span>
+                                    </div>
+                                    <div class="calc-row savings">
+                                        <span><i class="fas fa-piggy-bank"></i> 절약 금액 (좌석당):</span>
+                                        <span style="color: #10b981; font-weight: 600;">580,000원</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="biz_terms" required>
+                                    <span>이용약관 및 개인정보처리방침에 동의합니다 <span class="required">*</span></span>
+                                </label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="fas fa-user-plus"></i> <span id="biz_submit_text">회원 가입</span>
+                            </button>
+                        </form>
+
+                        <button class="btn btn-secondary btn-block mt-3" id="backBtn">
+                            <i class="fas fa-arrow-left"></i> 이전 단계
+                        </button>
+                    </div>
+
+                    <div id="registerMessage" class="message-box" style="display: none;"></div>
+
+                    <div class="auth-footer">
+                        <p>이미 회원이신가요?</p>
+                        <a href="login.html" class="btn btn-outline btn-block">
+                            <i class="fas fa-sign-in-alt"></i> 로그인
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 CNP 아카데미. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/register.js"></script>
+</body>
+</html>

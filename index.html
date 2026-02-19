@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNP 아카데미 - 멤버십 서비스</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>CNP 아카데미</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="active">홈</a></li>
+                <li><a href="courses.html">교육과정</a></li>
+                <!--<li><a href="#membership">멤버십</a></li>
+                <li><a href="#" id="navAuthLink">로그인</a></li>-->
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">CNP 아카데미</h1>
+                <h1 class="hero-title"><span class="highlight">2026 멤버십 서비스 출시</span></h1>
+                <p class="hero-subtitle">1년 멤버십으로 모든 교육을 100만원에! 20좌석 한정!</p>
+                <p class="hero-description">특별한 할인기간(2026.2.19~2026.3.18)을 놓치지 마세요!</p>
+                <div class="hero-buttons">
+                    <a href="#membership" class="btn btn-primary">멤버십 안내 <i class="fas fa-arrow-down"></i></a>
+                    <a href="courses.html" class="btn btn-secondary">교육과정 보기</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="#ffffff"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Membership Comparison Section -->
+    <section id="membership" class="membership-section">
+        <div class="container">
+            <h2 class="section-title">개별 교육 <span>수강</span> <span>vs</span> <span>1년</span> <span>멤버십</span></h2>
+            <p class="section-subtitle">멤버십으로 등록하면 최대 58만원 절약!</p>
+            
+            <div class="comparison-grid">
+                <!-- Individual Enrollment -->
+                <div class="comparison-card">
+                    <div class="card-header">
+                        <i class="fas fa-user"></i>
+                        <h3>개별 수강</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="price-box">
+                            <div class="price">
+                                <span class="amount">1,580,000</span>
+                                <span class="currency">원</span>
+                            </div>
+                            <p class="price-label">교육을 개별로 수강하는 경우의 전체 수강료 합계</p>
+                        </div>
+                        
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check"></i> 건축구조 초급교육 7주 (50만원)</li>
+                            <li><i class="fas fa-check"></i> 건축구조 중급교육 8주 (60만원)</li>
+                            <li><i class="fas fa-check"></i> 다양한 건설전문교육 연4회 (48만원)</li>
+                            <li><i class="fas fa-user"></i> 교육과정별 등록</li>
+                            <li><i class="fas fa-certificate"></i> 개인 수료증 발급</li>
+                        </ul>
+                        
+                        <!--<a href="register.html?type=individual" class="btn btn-outline">교육과정 개별 등록하기</a>-->
+                    </div>
+                </div>
+
+                <!-- Membership Enrollment -->
+                <div class="comparison-card featured">
+                    <div class="badge">BEST</div>
+                    <div class="card-header">
+                        <i class="fas fa-users"></i>
+                        <h3>멤버십 서비스</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="price-box">
+                            <div class="price">
+                                <span class="amount">100만원</span>
+                                <span class="per-seat">/좌석/년</span>
+                            </div>
+                            <p class="price-label">1년 멤버십 (좌석당)</p>
+                            <div class="savings">
+                                <i class="fas fa-tag"></i> 58만원 절약!
+                            </div>
+                        </div>
+                        
+                        <ul class="feature-list">
+                            <li><i class="fas fa-check-circle"></i> 건축구조 초급교육 7주 포함</li>
+                            <li><i class="fas fa-check-circle"></i> 건축구조 중급교육 8주 포함</li>
+                            <li><i class="fas fa-check-circle"></i> 다양한 건설전문교육 연4회 포함</li>
+                            <li><i class="fas fa-users"></i> <strong>회사 소속 누구나 참여, 개인도 멤버십으로 등록가능</strong></li>
+                            <li><i class="fas fa-chair"></i> 좌석 단위 등록</li>
+                            <li><i class="fas fa-sync-alt"></i> 교육마다 인원 교체 가능</li>
+                            <li><i class="fas fa-calendar-alt"></i> 1년 간의 모든 교육 수강</li>
+                        </ul>
+                        
+                        <!--<a href="register.html?type=membership" class="btn btn-primary">멤버십 등록하기</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How Membership Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">멤버십 서비스는 이렇게 운영됩니다</h2>
+            
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon"><i class="fas fa-building"></i></div>
+                    <h3>회사 또는 개인단위 등록</h3>
+                    <p>회사명 또는 개인으로 멤버십 등록,필요한 좌석 수를 구매합니다.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon"><i class="fas fa-chair"></i></div>
+                    <h3>좌석 할당</h3>
+                    <p>구매한 좌석 수만큼 교육에 참여할 수 있습니다.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon"><i class="fas fa-user-friends"></i></div>
+                    <h3>자유로운 참여</h3>
+                    <p>교육마다 다른 직원이 참여할 수 있습니다.</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <div class="step-icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>출석 관리</h3>
+                    <p>온라인으로 출석을 체크하고</p>
+                    <p>교육 현황을 실시간 확인합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Overview -->
+    <section class="courses-overview">
+        <div class="container">
+            <h2 class="section-title">2026년 교육 과정</h2>
+            <p class="section-subtitle">실무에 바로 적용 가능한 건축구조 전문 교육</p>
+            
+            <div class="courses-grid">
+                <!-- Beginner Course -->
+                <div class="course-card">
+                    <div class="course-badge">상반기</div>
+                    <div class="course-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>건축구조 초급교육</h3>
+                    <div class="course-meta">
+                        <span><i class="fas fa-calendar-alt"></i> 3월 ~ 4월 (7주)</span>
+                        <span><i class="fas fa-clock"></i> 목요일 19:00-22:00</span>
+                    </div>
+                    <ul class="course-topics">
+                        <li>구조역학 기본</li>
+                        <li>철근콘크리트구조</li>
+                        <li>철골구조 설계</li>
+                        <li>하중의 이해</li>
+                    </ul>
+                    <div class="course-price">
+                        <span class="price-individual">개별: 500,000원</span>
+                    </div>
+                    <a href="courses.html#beginner" class="btn btn-outline-small">자세히 보기</a>
+                </div>
+
+                <!-- Intermediate Course -->
+                <div class="course-card">
+                    <div class="course-badge">하반기</div>
+                    <div class="course-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>건축구조 중급교육</h3>
+                    <div class="course-meta">
+                        <span><i class="fas fa-calendar-alt"></i> 9월 ~ 10월 (8주)</span>
+                        <span><i class="fas fa-clock"></i> 목요일 19:00-22:00</span>
+                    </div>
+                    <ul class="course-topics">
+                        <li>RC구조 설계 심화</li>
+                        <li>철골구조 설계 심화</li>
+                        <li>성능기반설계</li>
+                        <li>철골안정론</li>
+                    </ul>
+                    <div class="course-price">
+                        <span class="price-individual">개별: 600,000원</span>
+                    </div>
+                    <a href="courses.html#intermediate" class="btn btn-outline-small">자세히 보기</a>
+                </div>
+
+                <!-- Safety Course -->
+                <div class="course-card">
+                    <div class="course-badge">연중</div>
+                    <div class="course-icon">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
+                    <h3>다양한 건설전문교육</h3>
+                    <div class="course-meta">
+                        <span><i class="fas fa-calendar-alt"></i> 분기별 (연 4회)</span>
+                        <span><i class="fas fa-users"></i> 건설기술인 및 관계자</span>
+                    </div>
+                    <ul class="course-topics">
+                        <li>목구조 건축물의 계획, 구조, 시공</li>
+                        <li>건설안전을 위한 AI 인사이트</li>
+                        <li>PC & 모듈러 건축물의 구조안전관리</li>
+                        <li>지하흙막이공사 및 탑다운 공법의 안전관리</li>
+                    </ul>
+                    <div class="course-price">
+                        <span class="price-individual">개별: 480,000원</span>
+                    </div>
+                    <a href="courses.html#safety" class="btn btn-outline-small">자세히 보기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="section-title">멤버십의 특별한 혜택</h2>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <h3>비용 절감</h3>
+                    <p>개별 수강 대비 58만원 절약<br>좌석당 100만원으로 모든 교육 수강</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>유연한 운영</h3>
+                    <p>교육마다 다른 직원 참여 가능<br>회사 상황에 맞춰 자유롭게 배정</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>전 과정 수강</h3>
+                    <p>초급, 중급, 안전교육까지<br>1년간 모든 교육 포함</p>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>통합 관리</h3>
+                    <p>온라인 출석 체크<br>교육 현황 실시간 확인</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>지금 멤버십에 가입하세요</h2>
+                <p>2026년 1년간 모든 교육을 좌석당 100만원에!</p>
+                <!--<div class="cta-buttons">
+                    <a href="register.html?type=membership" class="btn btn-primary btn-large">
+                        <i class="fas fa-rocket"></i> 멤버십 등록하기
+                    </a>
+                    <a href="register.html?type=individual" class="btn btn-secondary btn-large">
+                        <i class="fas fa-user"></i> 개별 등록하기
+                    </a>
+                </div>-->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-graduation-cap"></i> CNP 아카데미</h4>
+                    <p>실무자를 위한 건축구조 전문 교육기관</p>
+                    <p>분야별 전문 교육으로 건설 산업의 발전을 선도합니다</p>
+                </div>
+                <div class="footer-section">
+                    <h4>교육 과정</h4>
+                    <ul>
+                        <li><a href="courses.html#beginner">건축구조 초급교육</a></li>
+                        <li><a href="courses.html#intermediate">건축구조 중급교육</a></li>
+                        <li><a href="courses.html#safety">다양한 건설전문교육</a></li>
+                    </ul>
+                </div>
+                <!--<div class="footer-section">
+                    <h4>서비스</h4>
+                    <ul>
+                        <li><a href="register.html?type=membership">멤버십 등록</a></li>
+                        <li><a href="register.html?type=individual">개별 등록</a></li>
+                        <li><a href="dashboard.html">마이페이지</a></li>
+                    </ul>
+                </div>-->
+                <div class="footer-section">
+                    <h4>문의</h4>
+                    <p><i class="fas fa-envelope"></i> iworks@cnpgroup.co.kr</p>
+                    <p><i class="fas fa-phone"></i> 02-549-3744</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CNP 아카데미. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
